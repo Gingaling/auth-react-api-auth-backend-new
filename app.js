@@ -43,6 +43,7 @@ app.post("/register", (request, response) => {
     .then((hashedPassword) => {
       // create a new user instance and collect the data
       const user = new User({
+        userName: request.body.userName,
         email: request.body.email,
         password: hashedPassword,
       });
@@ -57,7 +58,7 @@ app.post("/register", (request, response) => {
             result,
           });
         })
-        // catch erroe if the new user wasn't added successfully to the database
+        // catch error if the new user wasn't added successfully to the database
         .catch((error) => {
           response.status(500).send({
             message: "Error creating user",
